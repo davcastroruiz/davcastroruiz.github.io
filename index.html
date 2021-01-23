@@ -4,14 +4,59 @@
     <meta charset="utf-8">
     <title>Hello, World! - A-Frame</title>
     <meta name="description" content="Hello, World! - A-Frame">
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
   </head>
+  <script>
+    var extendDeep = AFRAME.utils.extendDeep;
+
+// The mesh mixin provides common material properties for creating mesh-based primitives.
+// This makes the material component a default component and maps all the base material properties.
+var meshMixin = AFRAME.primitives.getMeshMixin();
+
+AFRAME.registerPrimitive('a-box-two', extendDeep({}, meshMixin, {
+  // Preset default components. These components and component properties will be attached to the entity out-of-the-box.
+  defaultComponents: {
+    geometry: {primitive: 'box'}
+  },
+
+  // Defined mappings from HTML attributes to component properties (using dots as delimiters).
+  // If we set `depth="5"` in HTML, then the primitive will automatically set `geometry="depth: 5"`.
+  mappings: {
+    depth: 'geometry.depth',
+    height: 'geometry.height',
+    width: 'geometry.width'
+  }
+}));
+AFRAME.registerPrimitive('a-ocean', {
+  // Attaches the `ocean` component by default.
+  // Defaults the ocean to be parallel to the ground.
+  defaultComponents: {
+    ocean: {},
+    rotation: {x: -90, y: 0, z: 0}
+  },
+
+  // Maps HTML attributes to the `ocean` component's properties.
+  mappings: {
+    width: 'ocean.width',
+    depth: 'ocean.depth',
+    density: 'ocean.density',
+    color: 'ocean.color',
+    opacity: 'ocean.opacity'
+  }
+});
+  </script>
   <body>
-    <a-scene>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+    
+    <a-scene physics>
+      <a-box position="-1 4 -3" rotation="0 45 0" color="tomato" metalness="0.3" dynamic-body></a-box>
+      <a-sphere position="1 5.25 -3" 
+      radius="0.75" 
+      color="#EF2D5E" 
+      metalness="0.2"
+      dynamic-body></a-sphere>
+      <a-cylinder position="0 0.75 -4" radius="0.5" height="3.5" color="#FFC65D" static-body></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
       <a-sky color="#ECECEC"></a-sky>
     </a-scene>
   </body>
