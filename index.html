@@ -1,13 +1,15 @@
 <html>
   <head>
-        <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
     <script src="https://unpkg.com/aframe-extras.ocean@%5E3.5.x/dist/aframe-extras.ocean.min.js"></script>
-    <script src="https://unpkg.com/aframe-gradient-sky@1.1.0/dist/gradientsky.min.js"></script>
+    <script src="https://unpkg.com/aframe-gradient-sky@1.2.0/dist/gradientsky.min.js"></script>
   </head>
   <body>
-    <a-scene inspector="https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
+    <a-scene>
+      <a-entity id="rain" particle-system="preset: rain; color: #24CAFF; particleCount: 5000"></a-entity>
+
       <a-entity id="sphere" geometry="primitive: sphere"
                 material="color: #EFEFEF; shader: flat"
                 position="0 0.15 -5"
@@ -23,40 +25,6 @@
                 scale="-1 1 1"></a-entity>
 
       <a-entity id="light" light="type: ambient; color: #888"></a-entity>
-      <a-entity id="cameraWrapper" position="0 1.6 8">
-        <a-entity id="camera" camera="" look-controls="" wasd-controls="" position="" rotation="" data-aframe-inspector-original-camera="">
-        
-        <!-- <a-entity id="cursor" position="0 0 -2" geometry="primitive: ring; radiusOuter: 0.016; radiusInner: 0.01" material="color: #ff9; shader: flat; transparent: true; opacity: 0.5" scale="2 2 2" raycaster=""> -->
-        </a-entity>
-        </a-entity>
-        </a-entity>
-      <a-entity id="leftHand" laser-controls="hand: left" daydream-controls="hand: left" gearvr-controls="hand: left" magicleap-controls="hand: left" oculus-go-controls="hand: left" oculus-touch-controls="" valve-index-controls="" vive-controls="" vive-focus-controls="hand: left" windows-motion-controls="hand: left" generic-tracked-controller-controls="hand: left"></a-entity>
-      <a-entity id="rightHand" laser-controls="" daydream-controls="hand: right" gearvr-controls="hand: right" magicleap-controls="hand: right" oculus-go-controls="hand: right" oculus-touch-controls="hand: right" valve-index-controls="hand: right" vive-controls="hand: right" vive-focus-controls="hand: right" windows-motion-controls="" generic-tracked-controller-controls="hand: right"></a-entity>
-      
     </a-scene>
-   <!--  <script>
-      AFRAME.registerComponent('modify-materials', {
-        init: function () {
-          // Wait for model to load.
-          this.el.addEventListener('model-loaded', () => {
-            // Grab the mesh / scene.
-            const obj = this.el.getObject3D('mesh');
-            // Go over the submeshes and modify materials we want.
-            obj.traverse(node => {
-              if (node.name.indexOf('ship') !== -1) {
-                node.material.color.set('red');
-              }
-            });
-          });
-        }
-      });
-    </script>
-    
-    <a-scene background="color: #ECECEC">
-      <a-assets>
-        <a-asset-item id="cityModel" position="0 0 0 0" src="./Single_Bed.gltf"></a-asset-item>
-      </a-assets>
-      <a-entity gltf-model="#cityModel" modify-materials></a-entity>
-    </a-scene> -->
   </body>
 </html>
